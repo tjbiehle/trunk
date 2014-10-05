@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour {
 	private int health;
 	bool started = false;
 
+	int voltage = 100;
+
 	bool incomponent = false;
 
 	Vector3 movement = new Vector3 (0, 0, 100);
@@ -36,26 +38,37 @@ public class PlayerMove : MonoBehaviour {
 			incomponent = true;
 			incr2 = -100;
 		}
+		if(ID == "R1")
+		{
+			incr1 = -30;
+			incr2 = 0;
+		}
+		if(ID == "R2")
+		{
+			incr1 = -70;
+			incr2 = 0;
+		}
 
 		if(!incomponent)
 		{
 			incomponent = true;
-			health += incr1;
-			HP.text = "H: " + health.ToString () +"mV";
+			voltage += incr1;
+			HP.text = "H: " + voltage.ToString () +"mV";
 		}
 		else
 		{
 			incomponent = false;
-			health += incr2;
-			HP.text = "H: " + health.ToString () +"mV";
+			voltage += incr2;
+			HP.text = "H: " + voltage.ToString () +"mV";
 		}
 	}
 
 	void Start()
 	{
-		HP.text = "HP: 500mV";
+		HP.text = "HP: 100";
 		Losing.text = "YOU \n LOST!!!!";
 		health = 500;
+		voltage = 100;
 		Button.text = "Play";
 		//	float forward = 10;
 
@@ -151,8 +164,13 @@ public class PlayerMove : MonoBehaviour {
 		}
 		if(other.gameObject.tag == "S_E")
 		{
+			if(gameObject.tag == "Later")
+			{
+				gameObject.SetActive (false);
+			}
 			movement = new Vector3 (-100, 0, -100);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
+			other.gameObject.SetActive (false);
 		}
 		if(other.gameObject.tag == "E_N")
 		{
@@ -178,6 +196,49 @@ public class PlayerMove : MonoBehaviour {
 
 		}
 
+		if(other.gameObject.tag == "DStop")
+		{
+
+			if(!incomponent)
+			{
+				gameObject.SetActive (false);
+			}
+			else
+				incomponent = !incomponent;
+
+		}
+		if(other.gameObject.tag == "DStart")
+		{
+			incomponent = !incomponent;
+		}
+		if(other.gameObject.tag == "Resistor1")
+		{
+			if(gameObject.tag == "Player")
+				updateHP ("R1");
+			incomponent = !incomponent;
+		}
+		if(other.gameObject.tag == "Resistor2")
+		{
+			if(gameObject.tag == "Player")
+				updateHP ("R2");
+			incomponent = !incomponent;
+		}
+		if(other.gameObject.tag == "END")
+		{
+			if(voltage < 35)
+			{
+				LoseScreen.gameObject.SetActive (true);
+				Level.gameObject.SetActive (false);
+			}
+			else
+			{
+				Losing.text = "YOU WIN!!!!";
+				LoseScreen.gameObject.SetActive (true);
+				Level.gameObject.SetActive (false);
+
+			}
+		}	
+
 
 
 		
@@ -189,7 +250,7 @@ public class PlayerMove : MonoBehaviour {
 			if(!started)
 			{
 				started = true;
-				movement = new Vector3 (00, 0, 100);
+				movement = new Vector3 (00, 0, -100);
 				rigidbody.AddForce (movement * speed * Time.deltaTime);
 			}
 		}

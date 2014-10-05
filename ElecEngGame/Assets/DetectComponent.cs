@@ -27,7 +27,7 @@ public class DetectComponent : MonoBehaviour {
 			if(!occupied)
 			{
 						//If there is a component on it
-				if( (other.gameObject.tag == "Capacitor") || (other.gameObject.tag == "Resistor") || (other.gameObject.tag == "Inductor") )
+				if( (other.gameObject.tag == "Capacitor") || (other.gameObject.tag == "Resistor") || (other.gameObject.tag == "Inductor") || (other.gameObject.tag == "Resistor1") || (other.gameObject.tag == "Resistor2"))
 				{
 					Result.text = other.gameObject.tag;
 					other.gameObject.rigidbody.AddForce (0, 200, 0);
