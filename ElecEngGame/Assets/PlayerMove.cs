@@ -3,63 +3,141 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
 	public float speed;
+	public GameObject Level;
+	public GameObject LoseScreen;
+	public GameObject Play;
+	public GUIText Losing;
+	public GUIText HP;
+	public GUIText Button;
+	private int health;
+	bool started = false;
+
+	bool incomponent = false;
+
 	Vector3 movement = new Vector3 (0, 0, 100);
 	Vector3 translate = new Vector3(0,0,0);
+
+	void updateHP(string ID)
+	{
+		int incr1 = 0;
+		int incr2 = 0;
+		if(ID == "R")
+		{
+			incr1 = -50;
+			incr2 = 20;
+		}
+		if (ID == "L") 
+		{
+			incr1 = -30;
+			incr2 = 10;
+		}
+		if(ID == "C")
+		{
+			incomponent = true;
+			incr2 = -100;
+		}
+
+		if(!incomponent)
+		{
+			incomponent = true;
+			health += incr1;
+			HP.text = "H: " + health.ToString () +"mV";
+		}
+		else
+		{
+			incomponent = false;
+			health += incr2;
+			HP.text = "H: " + health.ToString () +"mV";
+		}
+	}
+
 	void Start()
 	{
+		HP.text = "HP: 500mV";
+		Losing.text = "YOU \n LOST!!!!";
+		health = 500;
+		Button.text = "Play";
 		//	float forward = 10;
-//		movement = new Vector3 (00, 0, 100);
-//		rigidbody.AddForce (movement * speed * Time.deltaTime);
+
 	}
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "RN_ETrig") {
+			updateHP ("R");
+
 			movement = new Vector3 (0, 0, 50);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "RN_WTrig") {
+			updateHP ("R");
+
+
 			movement = new Vector3 (50, 0, 0);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "RW_NTrig") {
+			updateHP ("R");
+
+
 			movement = new Vector3 (-50, 0, 0);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "RE_NTrig") {
+			updateHP ("R");
+
+
 			movement = new Vector3 (0, 0, -50);
 			transform.position = transform.position + translate;
 		}
 
 		if (other.gameObject.tag == "CN_ETrig") {
+			updateHP ("C");
+
 			translate = new Vector3 (0, 0, 6);
 			transform.position = transform.position + translate;
 		}
 		if (other.gameObject.tag == "CN_WTrig") {
+			updateHP ("C");
+
 			translate = new Vector3 (5, 0, 0);
 			transform.position = transform.position + translate;
 		}
 		if (other.gameObject.tag == "CW_NTrig") {
+
+			updateHP ("C");
+
 			translate = new Vector3 (-5, 0, 0);
 			transform.position = transform.position + translate;
 		}
 		if (other.gameObject.tag == "CE_NTrig") {
+
+			updateHP ("C");
+
 			translate = new Vector3 (0, 0, -6);
 			transform.position = transform.position + translate;
 		}
 
 		if (other.gameObject.tag == "IN_ETrig") {
+			updateHP ("L");
+
 			movement = new Vector3 (0, 0, 50);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "IN_WTrig") {
+			updateHP ("L");
+
 			movement = new Vector3 (50, 0, 0);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "IW_NTrig") {
+			updateHP ("L");
+
 			movement = new Vector3 (-50, 0, 0);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
 		if (other.gameObject.tag == "IE_NTrig") {
+			updateHP ("L");
+
 			movement = new Vector3 (0, 0, -50);
 			rigidbody.AddForce (movement * speed * Time.deltaTime);
 		}
@@ -93,12 +171,35 @@ public class PlayerMove : MonoBehaviour {
 
 		}
 
+		if(other.gameObject.tag == "Mob")
+		{
+			LoseScreen.gameObject.SetActive (true);
+			Level.gameObject.SetActive (false);
+
+		}
+
 
 
 		
 	}
 	void FixedUpdate()
 	{
+		if(Play.gameObject.activeSelf == false)
+		{
+			if(!started)
+			{
+				started = true;
+				movement = new Vector3 (00, 0, 100);
+				rigidbody.AddForce (movement * speed * Time.deltaTime);
+			}
+		}
+
+
+		if (health <= 0)
+		{
+			LoseScreen.gameObject.SetActive (true);
+			Level.gameObject.SetActive (false);
+		}
 		/*
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");

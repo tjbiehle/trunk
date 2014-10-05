@@ -23,6 +23,10 @@ public class DropComponent : MonoBehaviour
 			downward = true;
 			gameObject.rigidbody.AddForce (0,-200 , 0);
 		}
+		if(gameObject.transform.position.y < -3)
+		{
+			gameObject.SetActive (false);
+		}
 	}
 
 	void OnMouseDown()
@@ -45,6 +49,7 @@ public class DropComponent : MonoBehaviour
 		}
 
 	}
+			/***************************** REMOVE IF OBJCTS DISAPPEARING ********************************/
 	void OnTriggerEnter(Collider other)
 	{
 		if(PlayButton.gameObject.activeSelf == false)

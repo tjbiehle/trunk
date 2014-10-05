@@ -45,6 +45,11 @@ public class ComponentTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(Parent.gameObject.activeSelf == false)
+		{
+			gameObject.SetActive (false);
+		}
+
 		transform.position = Parent.gameObject.transform.position + offset;
 		Vector3 temp = new Vector3 (transform.position.x, 0f, transform.position.z);
 		transform.position = temp;
