@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 			target = GetClickedObject (out hitInfo);
 			if (target != null && target.gameObject.tag == "Battery") {
 				_mouseState = true;
+				
 				screenSpace = Camera.main.WorldToScreenPoint (target.transform.position);
 				offset = target.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenSpace.z));
 			}
