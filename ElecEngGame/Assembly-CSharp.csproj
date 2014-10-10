@@ -47,12 +47,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ComponentTrigger.cs" />
+     <Compile Include="Assets\DesiredMeasures.cs" />
      <Compile Include="Assets\DetectComponent.cs" />
+     <Compile Include="Assets\DetermineResistor.cs" />
      <Compile Include="Assets\DiodeArrow.cs" />
      <Compile Include="Assets\DropComponent.cs" />
      <Compile Include="Assets\FloorTrigger.cs" />
      <Compile Include="Assets\Key.cs" />
+     <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\PlayerMove.cs" />
+     <Compile Include="Assets\Resistor.cs" />
      <Compile Include="Assets\ResistorTrigger.cs" />
      <Compile Include="Assets\StartGame.cs" />
   </ItemGroup>
