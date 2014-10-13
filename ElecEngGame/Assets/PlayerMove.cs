@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour {
 	public GUIText Button;
 	private int health;
 	public float voltage;
-	public GUIText PlayerInfo;
+	//public GUIText PlayerInfo;
 	bool started = false;
 	
 	public GameObject Spot1;
@@ -80,8 +80,8 @@ public class PlayerMove : MonoBehaviour {
 		health = 500;
 	//	voltage = 100;
 		Button.text = "BLAHAH";
-		PlayerInfo.pixelOffset = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z ) *10;
-		PlayerInfo.text = "";
+		//PlayerInfo.pixelOffset = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z ) *10;
+		//PlayerInfo.text = "";
 		//	float forward = 10;
 		
 	}
@@ -320,13 +320,13 @@ public class PlayerMove : MonoBehaviour {
 			if(!started)
 			{
 				evalcurrent ();
-				PlayerInfo.text = "Voltage: " + voltage + "\n Current: " + current;
+				//PlayerInfo.text = "Voltage: " + voltage + "\n Current: " + current;
 				started = true;
 				movement = new Vector3 (00, 0, -100);
 				rigidbody.AddForce (movement * speed * Time.deltaTime);
 			}
-			PlayerInfo.text = "Voltage: " + voltage + "\n Current: " + current;
-			PlayerInfo.pixelOffset = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z ) *10;
+			//PlayerInfo.text = "Voltage: " + voltage + "\n Current: " + current;
+			//PlayerInfo.pixelOffset = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.z ) *10;
 		}
 		
 		
