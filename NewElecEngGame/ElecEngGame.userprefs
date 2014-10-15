@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NewPlayerMove.cs">
+    <Files>
+      <File FileName="Assets\PlayerMove.cs" Line="390" Column="4" />
+      <File FileName="Assets\StartGame.cs" Line="8" Column="98" />
+      <File FileName="Assets\Resistor.cs" Line="22" Column="51" />
+      <File FileName="Assets\DesiredMeasures.cs" Line="22" Column="31" />
+      <File FileName="Assets\NewPlayerMove.cs" Line="3" Column="46" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
